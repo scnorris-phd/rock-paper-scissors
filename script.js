@@ -59,14 +59,12 @@ function roundOfGame() {
     }
 
     const playerValue = convertPlayerChoice(playerSelection);
-    console.log(playerValue);
+    // console.log(playerValue);
 
     console.log(`${playerNameCap} plays ${playerSelection}.`);
 
-    // Below is the function that returns the computer's choice.
-
     const computerChoice = getComputerChoice(1, 3);
-    console.log(computerChoice); // For debugging
+    // console.log(computerChoice);
 
     /*
     if (computerChoice === 1) {
@@ -136,10 +134,11 @@ function playGame() {
         roundOfGame();
         playGame();
     } else if (playerScore === 3) {
-        alert(`Game Over! ${playerNameCap} wins!`);
-        console.log(`Game Over! ${playerNameCap} wins!`);
+        alert(`Game Over! ${playerNameCap} Wins!`);
+        console.log(`Game Over! ${playerNameCap} Wins!`);
     } else if (computerScore === 3) {
-        alert(`Game Over! Computer wins!`);
+        alert(`Game Over! Computer Wins!`);
+        console.log(`Game Over! Computer Wins!`);
     }
 }
 
