@@ -19,11 +19,22 @@ function getComputerChoice(min, max) {
     return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
 }
 
-const playerName = 'User'; //prompt('Let\'s play Rock Paper Scissors! Best of five wins. Please enter your name.');
+const playerName = prompt('Let\'s play Rock Paper Scissors! First to three wins. Please enter your name.');
 const playerNameCap = capitalizeFirstLetter(playerName);
 
+let playerScore = 0;
+let computerScore = 0;
+
+function updatePlayerScore() {
+    return playerScore = playerScore + 1;
+}
+
+function updateComputerScore() {
+    return computerScore = computerScore + 1;
+}
+
 function roundOfGame() {
-    const playerChoiceInitial = prompt('Enter your choice.');
+    const playerChoiceInitial = prompt('Enter your choice. Rock, Paper, or Scissors.');
     const playerSelection = capitalizeFirstLetter(playerChoiceInitial);
 
     /* First pass at capitalization, prior to creating a function to capitalize the first letter of a string.
@@ -39,7 +50,7 @@ function roundOfGame() {
         } else if (playerSelection === 'Paper') {
             let playerSelectionNum = 2;
             return playerSelectionNum;
-        } else if (playerSelection === 'Scissor') {
+        } else if (playerSelection === 'Scissors') {
             let playerSelectionNum = 3;
             return playerSelectionNum;
         } else {
@@ -85,22 +96,28 @@ function roundOfGame() {
             return alert('Tie! Try again.');
         } else if (playerValue === 1 && computerChoice === 2) {
             console.log('You Lose! Paper beats Rock.');
-            return alert('You Lose! Paper beats Rock.');
+            alert('You Lose! Paper beats Rock.');
+            return updateComputerScore();
         } else if (playerValue === 1 && computerChoice === 3) {
             console.log('You Win! Rock beats Scissors.');
-            return alert('You Win! Rock beats Scissors.');
+            alert('You Win! Rock beats Scissors.');
+            return updatePlayerScore();
         } else if (playerValue === 2 && computerChoice === 1) {
             console.log('You Win! Paper beats Rock.');
-            return alert('You Win! Paper beats Rock.');
+            alert('You Win! Paper beats Rock.');
+            return updatePlayerScore();
         } else if (playerValue === 2 && computerChoice === 3) {
             console.log('You Lose! Scissors beats Paper.');
-            return alert('You Lose! Scissors beats Paper.');
+            alert('You Lose! Scissors beats Paper.');
+            return updateComputerScore();
         } else if (playerValue === 3 && computerChoice === 1) {
             console.log('You Lose! Rock beats Scissors.');
-            return alert('You Lose! Rock beats Scissors.');
+            alert('You Lose! Rock beats Scissors.');
+            return updateComputerScore();
         } else if (playerValue === 3 && computerChoice === 2) {
             console.log('You Win! Scissors beats Paper.');
-            return alert('You Win! Scissors beats Paper.');
+            alert('You Win! Scissors beats Paper.');
+            return updatePlayerScore();
         } else {
             console.log('Invalid round.');
         }
@@ -109,4 +126,21 @@ function roundOfGame() {
     const roundOutcome = playRound(playerValue, computerChoice);
 }
 
-roundOfGame();
+/*
+The project brief called for a five round game and gave the option of of researching loops or simply calling the roundOfGame() function five times.
+"Five rounds" has been interpreted as "best of three" and the playGame() function has been written to reflect this.
+*/
+
+function playGame() {
+    if ((playerScore < 3) && (computerScore < 3)) {
+        roundOfGame();
+        playGame();
+    } else if (playerScore === 3) {
+        alert(`Game Over! ${playerNameCap} wins!`);
+        console.log(`Game Over! ${playerNameCap} wins!`);
+    } else if (computerScore === 3) {
+        alert(`Game Over! Computer wins!`);
+    }
+}
+
+playGame();
