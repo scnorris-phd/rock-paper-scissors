@@ -8,25 +8,10 @@ Repeat the above until one player wins three times and return a game over messag
 */
 
 function capitalizeFirstLetter(text) {
-    let textLower = text.toLowerCase();
-    let textUpperFirst = textLower.toUpperCase().charAt(0) + textLower.slice(1);
+    const textLower = text.toLowerCase();
+    const textUpperFirst = textLower.toUpperCase().charAt(0) + textLower.slice(1);
     return textUpperFirst;
 }
-
-let playerName = prompt('Let\'s play Rock Paper Scissors! Please enter your name.');
-let playerNameCap = capitalizeFirstLetter(playerName);
-let playerChoiceInitial = prompt('Enter your choice.');
-let playerSelection = capitalizeFirstLetter(playerChoiceInitial);
-
-/* First pass at capitalization, prior to creating a function to capitalize the first letter of a string.
-let playerChoiceInitial = prompt('Enter your choice.');
-let playerChoiceLower = playerChoiceInitial.toLowerCase();
-let playerSelection = playerChoiceLower.toUpperCase().charAt(0) + playerChoiceLower.slice(1);
-*/
-
-console.log(`${playerNameCap} plays ${playerSelection}.`);
-
-// Below is the function that returns the computer's choice.
 
 function getComputerChoice(min, max) {
     const minCeiled = Math.ceil(min);
@@ -34,64 +19,94 @@ function getComputerChoice(min, max) {
     return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
 }
 
-let computerChoice = getComputerChoice(1, 3);
-console.log(computerChoice);
+const playerName = 'User'; //prompt('Let\'s play Rock Paper Scissors! Best of five wins. Please enter your name.');
+const playerNameCap = capitalizeFirstLetter(playerName);
 
-/*
-if (computerChoice === 1) {
-    console.log('Computer plays Rock.');
-} else if (computerChoice === 2) {
-    console.log('Computer plays Paper.');
-} else if (computerChoice === 3) {
-    console.log('Computer plays Scissors.');
-} */
+function roundOfGame() {
+    const playerChoiceInitial = prompt('Enter your choice.');
+    const playerSelection = capitalizeFirstLetter(playerChoiceInitial);
 
-switch(computerChoice) {
-    case 1:
+    /* First pass at capitalization, prior to creating a function to capitalize the first letter of a string.
+    let playerChoiceInitial = prompt('Enter your choice.');
+    let playerChoiceLower = playerChoiceInitial.toLowerCase();
+    let playerSelection = playerChoiceLower.toUpperCase().charAt(0) + playerChoiceLower.slice(1);
+    */
+
+    function convertPlayerChoice() {
+        if (playerSelection === 'Rock') {
+            let playerSelectionNum = 1;
+            return playerSelectionNum;
+        } else if (playerSelection === 'Paper') {
+            let playerSelectionNum = 2;
+            return playerSelectionNum;
+        } else if (playerSelection === 'Scissor') {
+            let playerSelectionNum = 3;
+            return playerSelectionNum;
+        } else {
+            return alert('You didn\'t play a valid hand. Please check your spelling and try again.');
+        }
+    }
+
+    const playerValue = convertPlayerChoice(playerSelection);
+    console.log(playerValue);
+
+    console.log(`${playerNameCap} plays ${playerSelection}.`);
+
+    // Below is the function that returns the computer's choice.
+
+    const computerChoice = getComputerChoice(1, 3);
+    console.log(computerChoice); // For debugging
+
+    /*
+    if (computerChoice === 1) {
         console.log('Computer plays Rock.');
-        break;
-    case 2:
+    } else if (computerChoice === 2) {
         console.log('Computer plays Paper.');
-        break;
-    case 3:
-        console.log('Computer plays Scissor.');
-        break;
-}
+    } else if (computerChoice === 3) {
+        console.log('Computer plays Scissors.');
+    } */
 
-function convertPlayerChoice() {
-    if (playerSelection === 'Rock') {
-        let playerSelectionNum = 1;
-        return playerSelectionNum;
-    } else if (playerSelection === 'Paper') {
-        let playerSelectionNum = 2;
-        return playerSelectionNum;
-    } else if (playerSelection === 'Scissor') {
-        let playerSelectionNum = 3;
-        return playerSelectionNum;
-    } else {
-        let playerSelectionNum = 'You didn\'t play a valid hand!';
-        return console.log(playerSelectionNum);
+    switch(computerChoice) {
+        case 1:
+            console.log('Computer plays Rock.');
+            break;
+        case 2:
+            console.log('Computer plays Paper.');
+            break;
+        case 3:
+            console.log('Computer plays Scissor.');
+            break;
     }
-}
 
-let playerValue = convertPlayerChoice(playerSelection);
 
-function playRound(playerValue, computerChoice) {
-    if (1, 2) {
-        return console.log('You Lose! Paper beats Rock.');
-    } else if (1, 3) {
-        return console.log('You Win! Rock beats Scissors.');
-    } else if (2, 1) {
-        return console.log('You Win! Paper beats Rock.');
-    } else if (2, 3) {
-        return console.log('You Lose! Scissors beats Paper.');
-    } else if (3, 1) {
-        return console.log('You Lose! Rock beats Scissors.');
-    } else if (3, 2) {
-        return console.log('You Win! Scissors beats Paper.');
-    } else {
-        return console.log('Tie game. Try again.')
+    function playRound(playerValue, computerChoice) {
+        if ((playerValue === 1 && computerChoice === 1) || (playerValue === 2 && computerChoice === 2) || (playerValue === 3 && computerChoice === 3)) {
+            console.log('Tie! Try again.');
+            return alert('Tie! Try again.');
+        } else if (playerValue === 1 && computerChoice === 2) {
+            console.log('You Lose! Paper beats Rock.');
+            return alert('You Lose! Paper beats Rock.');
+        } else if (playerValue === 1 && computerChoice === 3) {
+            console.log('You Win! Rock beats Scissors.');
+            return alert('You Win! Rock beats Scissors.');
+        } else if (playerValue === 2 && computerChoice === 1) {
+            console.log('You Win! Paper beats Rock.');
+            return alert('You Win! Paper beats Rock.');
+        } else if (playerValue === 2 && computerChoice === 3) {
+            console.log('You Lose! Scissors beats Paper.');
+            return alert('You Lose! Scissors beats Paper.');
+        } else if (playerValue === 3 && computerChoice === 1) {
+            console.log('You Lose! Rock beats Scissors.');
+            return alert('You Lose! Rock beats Scissors.');
+        } else if (playerValue === 3 && computerChoice === 2) {
+            console.log('You Win! Scissors beats Paper.');
+            return alert('You Win! Scissors beats Paper.');
+        } else {
+            console.log('Invalid round.');
+        }
     }
+
+    const roundOutcome = playRound(playerValue, computerChoice);
 }
 
-let roundOutcome = playRound();
+roundOfGame();
